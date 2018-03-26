@@ -21,17 +21,22 @@ func main() {
 	r := chi.NewRouter()
 
 	// GET / -> function
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("welcome!!!"))
-	})
-	r.Get("/nav", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("This is the navigation page"))
-	})
+	r.Get("/", routeHandler)
 
-	r.Get("/posts/{postId}", getPost)
+	r.Get("/nav", listPosts)
+
+	r.Get("/post/{postId}", getPost)
 
 	log.Printf("Server listening on port %s", port)
 	log.Fatal(http.ListenAndServe(":"+port, r))
+}
+
+func routeHandler(w http.ResponseWriter, req *http.Request) {
+	w.Write([]byte("welcome!!!"))
+}
+
+func listPosts(w http.ResponseWriter, req *http.Request) {
+	w.Write([]byte("This is the navigation page"))
 }
 
 func getPost(w http.ResponseWriter, req *http.Request) {
