@@ -28,6 +28,14 @@ func main() {
 		w.Write([]byte("This is the navigation page"))
 	})
 
+	r.Get("/posts/{postId}", getPost)
+
 	log.Printf("Server listening on port %s", port)
 	log.Fatal(http.ListenAndServe(":"+port, r))
+}
+
+func getPost(w http.ResponseWriter, req *http.Request) {
+	post := chi.URLParam(req, "postId")
+
+	w.Write([]byte(post))
 }
