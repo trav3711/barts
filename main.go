@@ -24,6 +24,9 @@ func main() {
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("welcome!!!"))
 	})
+	r.Get("/nav", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("This is the navigation page"))
+	})
 
 	log.Printf("Server listening on port %s", port)
 	log.Fatal(http.ListenAndServe(":"+port, r))
